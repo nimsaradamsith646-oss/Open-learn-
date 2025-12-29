@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Productivity Pro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>⚡ Productivity Pro</h1>
+  <button onclick="toggleTheme()">🌙 / ☀</button>
+</header>
+
+<section class="stats">
+  <div class="stat">Tasks <span id="taskCount">0</span></div>
+  <div class="stat">Completed <span id="doneCount">0</span></div>
+  <div class="stat">Work <span id="totalMinutes">0m</span></div>
+</section>
+
+<section class="glass todo">
+  <h2>📝 Tasks</h2>
+  <div class="task-input">
+    <input id="taskInput" placeholder="Add task...">
+    <button onclick="addTask()">+</button>
+  </div>
+  <ul id="taskList"></ul>
+</section>
+
+<section class="glass timer">
+  <h2>⏱ Work Timer</h2>
+  <div class="big-time" id="timer">00:00</div>
+  <div class="timer-btns">
+    <button onclick="startTimer()">Start</button>
+    <button onclick="stopTimer()">Stop</button>
+  </div>
+</section>
+
+<section class="glass">
+  <h2>📈 Weekly Work Time</h2>
+  <canvas id="lineChart" height="200"></canvas>
+</section>
+
+<section class="glass">
+  <h2>📅 Work History</h2>
+  <button class="danger" onclick="clearHistory()">Clear</button>
+  <table>
+    <thead>
+      <tr><th>Date</th><th>Minutes</th></tr>
+    </thead>
+    <tbody id="historyTable"></tbody>
+  </table>
+</section>
+
+<div class="stickers">
+  <span>🧠</span>
+  <span>🎯</span>
+  <span>💻</span>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

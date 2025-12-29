@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biological Science Resources</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Noto+Sans+Sinhala:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Base Fonts */
+        body { font-family: 'Inter', sans-serif; }
+        body.sinhala { font-family: 'Noto Sans Sinhala', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Merriweather', serif; }
+        body.sinhala h1, body.sinhala h2, body.sinhala h3, body.sinhala h4 { font-family: 'Noto Sans Sinhala', sans-serif; }
+        
+        /* Glass Effect */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        /* Hero Background - Biological Science Theme (Green/Teal) */
+        .hero-bg {
+            background-color: #0c4a6e; /* Dark Teal */
+            background-image: radial-gradient(at 0% 0%, hsla(160,30%,15%,1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(140,50%,20%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(170,40%,25%,1) 0, transparent 50%);
+        }
+
+        /* Tab Styles - Emerald is the default active color */
+        .active-tab {
+            background-color: #059669; /* Emerald 600 */
+            color: white;
+            border-color: #059669;
+        }
+        .inactive-tab {
+            background-color: white;
+            color: #475569;
+            border-color: #e2e8f0;
+        }
+        .inactive-tab:hover {
+            background-color: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        /* Subject Specific Colors for Hovers and Highlights */
+        .biology-color:hover { border-color: #059669; }
+        .chemistry-color:hover { border-color: #f43f5e; } /* Rose */
+        .physics-color:hover { border-color: #4f46e5; } /* Indigo */
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col transition-colors duration-300">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-panel border-b border-white/20 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-3">
+                    <a href="index.html" class="flex items-center gap-3 group">
+                        <div class="bg-emerald-600 p-2 rounded-lg text-white shadow-lg shadow-emerald-600/20 group-hover:bg-emerald-700 transition">
+                            <i data-lucide="arrow-left" class="h-6 w-6"></i>
+                        </div>
+                        <span class="text-xl font-bold text-slate-900 tracking-tight group-hover:text-emerald-700 transition" data-key="brand_back">Back to Home</span>
+                    </a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleLanguage()" class="flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium text-slate-600 hover:bg-slate-100 transition border border-slate-200">
+                        <i data-lucide="languages" class="h-4 w-4"></i>
+                        <span id="lang-label">සිංහල</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="pt-32 pb-16 hero-bg text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-emerald-600/20 rounded-full blur-3xl translate-y-1/2 translate-x-1/2"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-emerald-900/50 border border-emerald-500/30 text-emerald-200 text-sm font-medium mb-6">
+                <i data-lucide="microscope" class="h-4 w-4"></i>
+                <span data-key="header_tag">Stream Resources</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4" data-key="header_title">Biological Science Resources</h1>
+            <p class="text-slate-300 max-w-2xl mx-auto text-lg font-light" data-key="header_desc">
+                Integrated resources for Biology, Chemistry, and Physics—the pillars of the Biological Science stream.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8 relative z-20">
+        
+        <!-- Subject Tabs -->
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+            <button onclick="switchTab('biology')" id="tab-biology" class="active-tab px-6 py-3 rounded-xl font-semibold shadow-lg transition-all flex items-center gap-2 text-lg">
+                <i data-lucide="dna" class="h-5 w-5"></i>
+                <span data-key="tab_biology">Biology</span>
+            </button>
+            <button onclick="switchTab('chemistry')" id="tab-chemistry" class="inactive-tab px-6 py-3 rounded-xl font-semibold shadow-sm border transition-all flex items-center gap-2 text-lg">
+                <i data-lucide="flask-round" class="h-5 w-5"></i>
+                <span data-key="tab_chemistry">Chemistry</span>
+            </button>
+            <button onclick="switchTab('physics')" id="tab-physics" class="inactive-tab px-6 py-3 rounded-xl font-semibold shadow-sm border transition-all flex items-center gap-2 text-lg">
+                <i data-lucide="zap" class="h-5 w-5"></i>
+                <span data-key="tab_physics">Physics</span>
+            </button>
+        </div>
+
+        <!-- Content Area -->
+        <div class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden min-h-[500px]">
+            
+            <!-- BIOLOGY SECTION (Emerald - Primary Bio Color) -->
+            <div id="content-biology" class="p-6 md:p-8 animate-fade-in">
+                <div class="flex items-center justify-between mb-8 pb-4 border-b border-slate-100">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800" data-key="biology_title">Biology Resources</h2>
+                        <p class="text-slate-500 text-sm mt-1" data-key="biology_subtitle">Comprehensive materials for Genetics, Cell Biology, and Ecology.</p>
+                    </div>
+                    <div class="bg-emerald-50 p-3 rounded-full text-emerald-600 hidden md:block">
+                        <i data-lucide="dna" class="h-8 w-8"></i>
+                    </div>
+                </div>
+
+                <!-- Quick Links Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                    <a href="#" class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 biology-color hover:shadow-md transition group">
+                        <div class="bg-emerald-100 p-2.5 rounded-lg text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition">
+                            <i data-lucide="book" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-900 group-hover:text-emerald-700 transition" data-key="res_syllabus">Syllabus</h3>
+                            <p class="text-xs text-slate-500 mt-1">Latest Official Curriculum</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 biology-color hover:shadow-md transition group">
+                        <div class="bg-emerald-100 p-2.5 rounded-lg text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition">
+                            <i data-lucide="file-text" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-900 group-hover:text-emerald-700 transition" data-key="res_guide">Teachers' Guide</h3>
+                            <p class="text-xs text-slate-500 mt-1">Grades 12 & 13 Instructional Guide</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 biology-color hover:shadow-md transition group">
+                        <div class="bg-emerald-100 p-2.5 rounded-lg text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition">
+                            <i data-lucide="sticky-note" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-900 group-hover:text-emerald-700 transition" data-key="res_notes">Short Notes</h3>
+                            <p class="text-xs text-slate-500 mt-1">Quick Revision Summaries</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 biology-color hover:shadow-md transition group">
+                        <div class="bg-emerald-100 p-2.5 rounded-lg text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition">
+                            <i data-lucide="youtube" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-900 group-hover:text-emerald-700 transition" data-key="res_videos">Video Lessons</h3>
+                            <p class="text-xs text-slate-500 mt-1">Tutorials & Explanations</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Exam Materials Grid -->
+                <div class="mb-6 pt-4 border-t border-slate-100">
+                    <h3 class="text-xl font-bold mb-4 text-slate-700" data-key="papers_section_title">Exam Materials & Publications</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <!-- Past Papers -->
+                        <a href="#" class="flex flex-col items-center justify-center p-4 text-center rounded-xl bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 transition group shadow-sm hover:shadow-md">
+                            <i data-lucide="folder-archive" class="h-6 w-6 text-emerald-600 mb-1 group-hover:scale-105 transition"></i>
+                            <span class="font-medium text-slate-800 text-sm" data-key="link_past_papers">Past Papers</span>
+                        </a>
+                        <!-- Marking Schemes -->
+                        <a href="#" class="flex flex-col items-center justify-center p-4 text-center rounded-xl bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 transition group shadow-sm hover:shadow-md">
+                            <i data-lucide="check-square" class="h-6 w-6 text-emerald-600 mb-1 group-hover:scale-105 transition"></i>
+                            <span class="font-medium text-slate-800 text-sm" data-key="link_marking_schemes">Marking Schemes</span>
+                        </a>
+                        <!-- School Papers -->
+                        <a href="#" class="flex flex-col items-center justify-center p-4 text-center rounded-xl bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 transition group shadow-sm hover:shadow-md">
+                            <i data-lucide="school" class="h-6 w-6 text-emerald-600 mb-1 group-hover:scale-105 transition"></i>
+                            <span class="font-medium text-slate-800 text-sm" data-key="link_school_papers">School Papers</span>
+                        </a>
+                        <!-- Provincial Papers -->
+                        <a href="#" class="flex flex-col items-center justify-center p-4 text-center rounded-xl bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 transition group shadow-sm hover:shadow-md">
+                            <i data-lucide="map-pin" class="h-6 w-6 text-emerald-600 mb-1 group-hover:scale-105 transition"></i>
+                            <span class="font-medium text-slate-800 text-sm" data-key="link_provincial_papers">Provincial Papers</span>
+                        </a>
+                        <!-- Pesuru Books -->
+                        <a href="#" class="flex flex-col items-center justify-center p-4 text-center rounded-xl bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 transition group shadow-sm hover:shadow-md">
+                            <i data-lucide="notebook-pen" class="h-6 w-6 text-emerald-600 mb-1 group-hover:scale-105 transition"></i>
+                            <span class="font-medium text-slate-800 text-sm" data-key="link_pesuru_books">Pesuru Books</span>
+                        </a>
+                        <!-- Model Papers -->
+                        <a href="#" class="flex flex-col items-center justify-center p-4 text-center rounded-xl bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 transition group shadow-sm hover:shadow-md">
+                            <i data-lucide="gantt-chart" class="h-6 w-6 text-emerald-600 mb-1 group-hover:scale-105 transition"></i>
+                            <span class="font-medium text-slate-800 text-sm" data-key="link_model_papers">Model Papers</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHEMISTRY SECTION (Rose/Red) -->
+            <div id="content-chemistry" class="p-6 md:p-8 hidden animate-fade-in">
+                <div class="flex items-center justify-between mb-8 pb-4 border-b border-slate-100">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800" data-key="chemistry_title">Chemistry Resources</h2>
+                        <p class="text-slate-500 text-sm mt-1" data-key="chemistry_subtitle">Essential materials for Organic, Inorganic, and Physical Chemistry topics.</p>
+                    </div>
+                    <div class="bg-rose-50 p-3 rounded-full text-rose-600 hidden md:block">
+                        <i data-lucide="flask-round" class="h-8 w-8"></i>
+                    </div>
+                </div>
+
+                <!-- Quick Links Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                    <a href="#" class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 chemistry-color hover:shadow-md transition group">
+                        <div class="bg-rose-100 p-2.5 rounded-lg text-rose-600 group-hover:bg-rose-600 group-hover:text-white transition">
+                            <i data-lucide="book" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-900 group-hover:text-rose-700 transition" data-key="res_syllabus">Syllabus</h3>
+                            <p class="text-xs text-slate-500 mt-1">Latest Official Curriculum</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 chemistry-color hover:shadow-md transition group">
+                        <div class="bg-rose-100 p-2.5 rounded-lg text-rose-600 group-hover:bg-rose-600 group-hover:text-white transition">
+                            <i data-lucide="file-text" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-900 group-hover:text-rose-700 transition" data-key="res_guide">Teachers' Guide</h3>
+                            <p class="text-xs text-slate-500 mt-1">Grades 12 & 13 Instructional Guide</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 chemistry-color hover:shadow-md transition group">
+                        <div class="bg-rose-100 p-2.5 rounded-lg text-rose-600 group-hover:bg-rose-600 group-hover:text-white transition">
+                            <i data-lucide="sticky-note" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-900 group-hover:text-rose-700 transition" data-key="res_notes">Short Notes</h3>
+                            <p class="text-xs text-slate-500 mt-1">Quick Revision Summaries</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 chemistry-color hover:shadow-md transition group">
+                        <div class="bg-rose-100 p-2.5 rounded-lg text-rose-600 group-hover:bg-rose-600 group-hover:text-white transition">
+                            <i data-lucide="youtube" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-900 group-hover:text-rose-700 transition" data-key="res_videos">Video Lessons</h3>
+                            <p class="text-xs text-slate-500 mt-1">Tutorials & Explanations</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Exam Materials Grid -->
+                <div class="mb-6 pt-4 border-t border-slate-100">
+                    <h3 class="text-xl font-bold mb-4 text-slate-700" data-key="papers_section_title">Exam Materials & Publications</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <!-- Past Papers -->
+                        <a href="#" class="flex flex-col items-center justify-center p-4 text-center rounded-xl bg-rose-50 border border-rose-200 hover:bg-rose-100 transition group shadow-sm hover:shadow-md">
+                            <i data-lucide="folder-archive" class="h-6 w-6 text-rose-600 mb-1 group-hover:scale-105 transition"></i>
+                            <span class="font-medium text-slate-800 text-sm" data-key="link_past_papers">Past Papers</span>
+                        </a>
+                        <!-- Marking Schemes -->
+                        <a href="#" class="flex flex-col items-center justify-center p-4 text-center rounded-xl bg-rose-50 border border-rose-200 hover:bg-rose-100 transition group shadow-sm hover:shadow-md">
+                            <i data-lucide="check-square" class="h-6 w-6 text-rose-600 mb-1 group-hover:scale-105 transition"></i>
+                            <span class="font-medium text-slate-800 text-sm" data-key="link_marking_schemes">Marking Schemes</span>
+                        </a>
+                        <!-- School Papers -->
+                        <a href="#" class="flex flex-col items-center justify-center p-4 text-center rounded-xl bg-rose-50 border border-rose-200 hover:bg-rose-100 transition group shadow-sm hover:shadow-md">
+                            <i data-lucide="school" class="h-6 w-6 text-rose-600 mb-1 group-hover:scale-105 transition"></i>
+                            <span class="font-medium text-slate-800 text-sm" data-key="link_school_papers">School Papers</span>
+                        </a>
+                        <!-- Provincial Papers -->
+                        <a href="#" class="flex flex-col items-center justify-center p-4 text-center rounded-xl bg-rose-50 border border-rose-200 hover:bg-rose-100 transition group shadow-sm hover:shadow-md">
+                            <i data-lucide="map-pin" class="h-6 w-6 text-rose-600 mb-1 group-hover:scale-105 transition"></i>
+                            <span class="font-medium text-slate-800 text-sm" data-key="link_provincial_papers">Provincial Papers</span>
+                        </a>
+                        <!-- Pesuru Books -->
+                        <a href="#" class="flex flex-col items-center justify-center p-4 text-center rounded-xl bg-rose-50 border border-rose-200 hover:bg-rose-100 transition group shadow-sm hover:shadow-md">
+                            <i data-lucide="notebook-pen" class="h-6 w-6 text-rose-600 mb-1 group-hover:scale-105 transition"></i>
+                            <span class="font-medium text-slate-800 text-sm" data-key="link_pesuru_books">Pesuru Books</span>
+                        </a>
+                        <!-- Model Papers -->
+                        <a href="#" class="flex flex-col items-center justify-center p-4 text-center rounded-xl bg-rose-50 border border-rose-200 hover:bg-rose-100 transition group shadow-sm hover:shadow-md">
+                            <i data-lucide="gantt-chart" class="h-6 w-6 text-rose-600 mb-1 group-hover:scale-105 transition"></i>
+                            <span class="font-medium text-slate-800 text-sm" data-key="link_model_papers">Model Papers</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHYSICS SECTION (Indigo/Blue) -->
+            <div id="content-physics" class="p-6 md:p-8 hidden animate-fade-in">
+                <div class="flex items-center justify-between mb-8 pb-4 border-b border-slate-100">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800" data-key="physics_title">Physics Resources</h2>
+                        <p class="text-slate-500 text-sm mt-1" data-key="physics_subtitle">Resources covering Mechanics, Waves, Electricity, and Modern Physics.</p>
+                    </div>
+                    <div class="bg-indigo-50 p-3 rounded-full text-indigo-600 hidden md:block">
+                        <i data-lucide="zap" class="h-8 w-8"></i>
+                    </div>
+                </div>
+
+                <!-- Quick Links Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                    <a href="#" class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 physics-color hover:shadow-md transition group">
+                        <div class="bg-indigo-100 p-2.5 rounded-lg text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition">
+                            <i data-lucide="book" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-900 group-hover:text-indigo-700 transition" data-key="res_syllabus">Syllabus</h3>
+                            <p class="text-xs text-slate-500 mt-1">Latest Official Curriculum</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 physics-color hover:shadow-md transition group">
+                        <div class="bg-indigo-100 p-2.5 rounded-lg text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition">
+                            <i data-lucide="file-text" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-900 group-hover:text-indigo-700 transition" data-key="res_guide">Teachers' Guide</h3>
+                            <p class="text-xs text-slate-500 mt-1">Grades 12 & 13 Instructional Guide</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 physics-color hover:shadow-md transition group">
+                        <div class="bg-indigo-100 p-2.5 rounded-lg text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition">
+                            <i data-lucide="sticky-note" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-900 group-hover:text-indigo-700 transition" data-key="res_notes">Short Notes</h3>
+                            <p class="text-xs text-slate-500 mt-1">Quick Revision Summaries</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 physics-color hover:shadow-md transition group">
+                        <div class="bg-indigo-100 p-2.5 rounded-lg text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition">
+                            <i data-lucide="youtube" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-900 group-hover:text-indigo-700 transition" data-key="res_videos">Video Lessons</h3>
+                            <p class="text-xs text-slate-500 mt-1">Tutorials & Explanations</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Exam Materials Grid -->
+                <div class="mb-6 pt-4 border-t border-slate-100">
+                    <h3 class="text-xl font-bold mb-4 text-slate-700" data-key="papers_section_title">Exam Materials & Publications</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <!-- Past Papers -->
+                        <a href="#" class="flex flex-col items-center justify-center p-4 text-center rounded-xl bg-indigo-50 border border-indigo-200 hover:bg-indigo-100 transition group shadow-sm hover:shadow-md">
+                            <i data-lucide="folder-archive" class="h-6 w-6 text-indigo-600 mb-1 group-hover:scale-105 transition"></i>
+                            <span class="font-medium text-slate-800 text-sm" data-key="link_past_papers">Past Papers</span>
+                        </a>
+                        <!-- Marking Schemes -->
+                        <a href="#" class="flex flex-col items-center justify-center p-4 text-center rounded-xl bg-indigo-50 border border-indigo-200 hover:bg-indigo-100 transition group shadow-sm hover:shadow-md">
+                            <i data-lucide="check-square" class="h-6 w-6 text-indigo-600 mb-1 group-hover:scale-105 transition"></i>
+                            <span class="font-medium text-slate-800 text-sm" data-key="link_marking_schemes">Marking Schemes</span>
+                        </a>
+                        <!-- School Papers -->
+                        <a href="#" class="flex flex-col items-center justify-center p-4 text-center rounded-xl bg-indigo-50 border border-indigo-200 hover:bg-indigo-100 transition group shadow-sm hover:shadow-md">
+                            <i data-lucide="school" class="h-6 w-6 text-indigo-600 mb-1 group-hover:scale-105 transition"></i>
+                            <span class="font-medium text-slate-800 text-sm" data-key="link_school_papers">School Papers</span>
+                        </a>
+                        <!-- Provincial Papers -->
+                        <a href="#" class="flex flex-col items-center justify-center p-4 text-center rounded-xl bg-indigo-50 border border-indigo-200 hover:bg-indigo-100 transition group shadow-sm hover:shadow-md">
+                            <i data-lucide="map-pin" class="h-6 w-6 text-indigo-600 mb-1 group-hover:scale-105 transition"></i>
+                            <span class="font-medium text-slate-800 text-sm" data-key="link_provincial_papers">Provincial Papers</span>
+                        </a>
+                        <!-- Pesuru Books -->
+                        <a href="#" class="flex flex-col items-center justify-center p-4 text-center rounded-xl bg-indigo-50 border border-indigo-200 hover:bg-indigo-100 transition group shadow-sm hover:shadow-md">
+                            <i data-lucide="notebook-pen" class="h-6 w-6 text-indigo-600 mb-1 group-hover:scale-105 transition"></i>
+                            <span class="font-medium text-slate-800 text-sm" data-key="link_pesuru_books">Pesuru Books</span>
+                        </a>
+                        <!-- Model Papers -->
+                        <a href="#" class="flex flex-col items-center justify-center p-4 text-center rounded-xl bg-indigo-50 border border-indigo-200 hover:bg-indigo-100 transition group shadow-sm hover:shadow-md">
+                            <i data-lucide="gantt-chart" class="h-6 w-6 text-indigo-600 mb-1 group-hover:scale-105 transition"></i>
+                            <span class="font-medium text-slate-800 text-sm" data-key="link_model_papers">Model Papers</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300 py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex items-center justify-center gap-2 text-white mb-4">
+                <i data-lucide="graduation-cap" class="h-6 w-6 text-emerald-500"></i>
+                <span class="text-lg font-bold" data-key="footer_brand">OpenLearn</span>
+            </div>
+            <p class="text-slate-500 text-sm mb-4" data-key="footer_sub">Empowering Biological Science Students</p>
+            <p class="text-xs text-slate-600" data-key="footer_copy">© 2025 OpenLearn. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Logic Script -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // --- Tabs Logic ---
+        function switchTab(subject) {
+            // Hide all contents and deactivate all tabs
+            ['biology', 'chemistry', 'physics'].forEach(s => {
+                const content = document.getElementById(`content-${s}`);
+                const tab = document.getElementById(`tab-${s}`);
+                if (content) content.classList.add('hidden');
+                if (tab) {
+                    tab.classList.remove('active-tab');
+                    tab.classList.add('inactive-tab');
+                }
+            });
+
+            // Show selected and activate tab
+            const newContent = document.getElementById(`content-${subject}`);
+            const newTab = document.getElementById(`tab-${subject}`);
+
+            if (newContent) newContent.classList.remove('hidden');
+            if (newTab) {
+                newTab.classList.remove('inactive-tab');
+                newTab.classList.add('active-tab');
+            }
+        }
+
+        // --- Translation Logic ---
+        const translations = {
+            en: {
+                brand_back: "Back to Home",
+                header_tag: "Stream Resources",
+                header_title: "Biological Science Resources", /* UPDATED */
+                header_desc: "Integrated resources for Biology, Chemistry, and Physics—the pillars of the Biological Science stream.",
+                tab_biology: "Biology",
+                tab_chemistry: "Chemistry",
+                tab_physics: "Physics",
+                
+                // Subject Section Titles (REMOVED BRACKETED TEXT)
+                biology_title: "Biology Resources",
+                biology_subtitle: "Comprehensive materials for Genetics, Cell Biology, and Ecology.",
+                
+                chemistry_title: "Chemistry Resources",
+                chemistry_subtitle: "Essential materials for Organic, Inorganic, and Physical Chemistry topics.",
+
+                physics_title: "Physics Resources",
+                physics_subtitle: "Resources covering Mechanics, Waves, Electricity, and Modern Physics.",
+
+                // Common Resources (Quick Links)
+                res_syllabus: "Syllabus",
+                res_guide: "Teachers' Guide",
+                res_notes: "Short Notes",
+                res_videos: "Video Lessons", 
+                
+                // Exam Materials Links
+                papers_section_title: "Exam Materials & Publications",
+                link_past_papers: "Past Papers",
+                link_marking_schemes: "Marking Schemes",
+                link_school_papers: "School Papers",
+                link_provincial_papers: "Provincial Papers",
+                link_pesuru_books: "Pesuru Books",
+                link_model_papers: "Model Papers",
+
+                // Footer
+                footer_brand: "OpenLearn",
+                footer_sub: "Empowering Biological Science Students",
+                footer_copy: "© 2025 OpenLearn. All rights reserved."
+            },
+            si: {
+                brand_back: "මුල් පිටුවට",
+                header_tag: "විෂය ධාරා සම්පත්",
+                header_title: "ජීව විද්‍යා සම්පත්", /* UPDATED */
+                header_desc: "ජීව විද්‍යා විෂය ධාරාවේ කුළුණු වන ජීව විද්‍යාව, රසායන විද්‍යාව සහ භෞතික විද්‍යාව සඳහා ඒකාබද්ධ සම්පත්.",
+                tab_biology: "ජීව විද්‍යාව",
+                tab_chemistry: "රසායන විද්‍යාව",
+                tab_physics: "භෞතික විද්‍යාව",
+                
+                // Subject Section Titles (REMOVED BRACKETED TEXT)
+                biology_title: "ජීව විද්‍යා සම්පත්",
+                biology_subtitle: "ජාන විද්‍යාව, සෛල විද්‍යාව සහ පරිසර විද්‍යාව සඳහා විස්තීර්ණ ද්‍රව්‍ය.",
+                
+                chemistry_title: "රසායන විද්‍යා සම්පත්",
+                chemistry_subtitle: "කාබනික, අකාබනික සහ භෞතික රසායන විද්‍යා මාතෘකා සඳහා අත්‍යවශ්‍ය ද්‍රව්‍ය.",
+
+                physics_title: "භෞතික විද්‍යා සම්පත්",
+                physics_subtitle: "යාන්ත්‍ර විද්‍යාව, තරංග, විදුලිය සහ නවීන භෞතික විද්‍යාව ආවරණය කරන සම්පත්.",
+
+                // Common Resources (Quick Links)
+                res_syllabus: "විෂය නිර්දේශය",
+                res_guide: "ගුරු මාර්ගෝපදේශ",
+                res_notes: "කෙටි සටහන්",
+                res_videos: "වීඩියෝ පාඩම්",
+                
+                // Exam Materials Links
+                papers_section_title: "විභාග ද්‍රව්‍ය සහ ප්‍රකාශන",
+                link_past_papers: "පසුගිය ප්‍රශ්න පත්‍ර",
+                link_marking_schemes: "ලකුණු ලබා දීමේ පටිපාටි",
+                link_school_papers: "පාසල් ප්‍රශ්න පත්‍ර",
+                link_provincial_papers: "පළාත් ප්‍රශ්න පත්‍ර",
+                link_pesuru_books: "පේසූරු පොත්",
+                link_model_papers: "ආදර්ශ ප්‍රශ්න පත්‍ර",
+
+                // Footer
+                footer_brand: "OpenLearn",
+                footer_sub: "ජීව විද්‍යා සිසුන් බලගැන්වීම",
+                footer_copy: "© 2025 OpenLearn. සියලුම හිමිකම් ඇවිරිණි."
+            }
+        };
+
+        let currentLang = 'en';
+
+        // Set initial language and visibility
+        window.onload = () => {
+             lucide.createIcons();
+             switchTab('biology'); // Ensure the first tab is visible on load
+        }
+
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'si' : 'en';
+            
+            // Update Body Class for Font
+            if (currentLang === 'si') {
+                document.body.classList.add('sinhala');
+                document.getElementById('lang-label').innerText = "English";
+            } else {
+                document.body.classList.remove('sinhala');
+                document.getElementById('lang-label').innerText = "සිංහල";
+            }
+
+            // Update all text elements with data-key
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[currentLang][key]) {
+                    el.innerText = translations[currentLang][key];
+                }
+            });
+        }
+    </script>
+</body>
+</html>

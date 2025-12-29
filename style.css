@@ -1,0 +1,140 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#0f172a,#020617);
+    color: #e5e7eb;
+  }
+  
+  .light {
+    background: linear-gradient(135deg,#e0f2fe,#f8fafc);
+    color: #020617;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  button {
+    border: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    background: #3b82f6;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .danger {
+    background: #ef4444;
+  }
+  
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 12px;
+    padding: 0 20px;
+  }
+  
+  .stat {
+    background: rgba(255,255,255,0.08);
+    padding: 16px;
+    border-radius: 14px;
+    text-align: center;
+    font-size: 18px;
+  }
+  
+  .stat span {
+    display: block;
+    font-size: 26px;
+    margin-top: 6px;
+  }
+  
+  .glass {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    animation: fadeUp .4s ease;
+  }
+  
+  .todo ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .todo li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin-top: 8px;
+    background: rgba(59,130,246,0.2);
+    border-radius: 10px;
+  }
+  
+  .task-input {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .task-input input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+  }
+  
+  .big-time {
+    font-size: 48px;
+    text-align: center;
+    margin: 10px 0;
+  }
+  
+  .timer-btns {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .stickers {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 12px;
+    font-size: 32px;
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @media(max-width:600px){
+    .stats { grid-template-columns: 1fr; }
+  }
+  
+  
+  
+  
